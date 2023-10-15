@@ -25,7 +25,9 @@
     --black: hsl(0, 0%, 0%);
     --amaranth: hsl(349, 69%, 53%);
   
-    --primary: hsl(120, 40%, 35%); 
+    --primary: hsl(243, 63%, 59%);
+    /* hsl(120, 40%, 35%);  */
+
     --primaryLight:  "#6b62ff"
     
     /*  //hsl(120, 40%, 40%); */
@@ -950,8 +952,8 @@
     .hero-banner {
       top: 55%;
       right: -50px;
+    
     }
-  
   
   
     /**
