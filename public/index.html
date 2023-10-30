@@ -9,7 +9,7 @@
     <!-- 
     - favicon
   -->
-    <link rel="shortcut icon" href="./assets/images/splashscreen.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/images/logo_potekole.png" type="image/x-icon">
 
     <!-- 
       - custom css link
@@ -28,10 +28,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Grape+Nuts&family=Lilita+One&display=swap" rel="stylesheet">
 
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
+    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth-compat.js"></script> 
 
   </head>
   <body id="top" bgcolor="white">
@@ -86,9 +85,14 @@
     </div>
   </header>
 
-    <main>
+     
       <article class="container">
-  
+           <!-- 
+            - #Dynamique content
+          -->
+ 
+        <section class="overview" id="fundraisingDetail"></section>
+
         <!-- 
           - #HERO
         -->
@@ -187,31 +191,25 @@ POTE KOLE est une application mobile innovante conçue pour révolutionner la co
        <!-- 
         - #OVERVIEW
       -->
+      </section>
 
       <section class="overview" id="overview">
         <div class="overview-card">
-
           <figure class="overview-banner">
-            <!-- <img src="./assets/images/overview-banner.png" alt="overview banner" class="img-logo"> -->
             <img src="./assets/images/play_time.svg" alt="overview banner" class="img-logo">
           </figure>
 
           <div class="overview-content">
-            
             <h2 class="h2 overview-title">POTEKOLE est bien plus qu'une simple application de Collect</h2>
-
             <ul class="overview-list">
-
               <li class="overview-item">
                 <ion-icon name="notifications-outline"></ion-icon>
                 <span><strong> </strong></span>
               </li>
-
               <li class="overview-item">
                 <ion-icon name="accessibility-outline"></ion-icon>
                 <span><strong>  Donnez du Pouvoir à la Générosité,  </strong> votre Compassion, notre Plateforme</span>
               </li>
-
               <li> 
                 <a href="https://appdistribution.firebase.google.com/mobilerequired">
                   <button class="btn-primary" onclick="">
@@ -219,13 +217,10 @@ POTE KOLE est une application mobile innovante conçue pour révolutionner la co
                   </button>
                 </a>
               </li>
-            
+    
             </ul>
-
           </div>
-
         </div>
-
       </section>
 
       </article>    
@@ -348,8 +343,27 @@ POTE KOLE est une application mobile innovante conçue pour révolutionner la co
       -->
       <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
       <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-  
+     
+      <script src="projects.js"></script>
+    
       <script>
+          // Your web app's Firebase configuration
+          // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+          const firebaseConfig = {
+            apiKey: "AIzaSyAwP7gx3L5GvJrCUS-IO6DwvtpP_CsayLI",
+            authDomain: "pote-kole.firebaseapp.com",
+            projectId: "pote-kole",
+            storageBucket: "pote-kole.appspot.com",
+            messagingSenderId: "1007886381659",
+            appId: "1:1007886381659:web:365729b902a192dc5a857e",
+            measurementId: "G-8WXKYZPBWB"
+          };
+
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig)
+          const db = firebase.firestore();
+
+
         const getUrlParameter = (name) => {
             const params = new URLSearchParams(window.location.search);
             return params.get(name);
@@ -359,16 +373,52 @@ POTE KOLE est une application mobile innovante conçue pour révolutionner la co
         const id = getUrlParameter('id');
 
         if (id) {
-        const deeplink = `potekole://fundraising/${id}`;
+            const deeplink = `potekole://fundraising/${id}`;
             // Open the deep link if possible
             window.location.href = deeplink;
+            (async function main() {
+                const projectObj = new Project();
+                // console.log(" GET DATA",await projectObj.getAll());
+                const project = await projectObj.get(id);
+               let details =  ` 
+                  <div class="overview-card">
+                    <figure class="overview-banner">
+                      <img src=${project.image} alt=${project.name} class="">
+                    </figure>
+
+                    <div class="overview-content">
+                      <h2 class="h2 overview-title">
+                        ${project.name}  
+                      </h2>
+                      <ul class="overview-list">
+                      
+                        <li class="overview-item">
+                          <ion-icon name="notifications-outline"></ion-icon>
+                          <span><strong>   ${project.description} </strong> </span>
+                        </li>
+                        <li> 
+                          <a href="https://appdistribution.firebase.google.com/mobilerequired">
+                            <button class="btn-primary" onclick="window.location.href = ${deeplink}">
+                             Pote KOLE
+                            </button>
+                          </a>
+                        </li>
+                    
+                      </ul>
+                    </div>
+                  </div>
+                `;
+
+               document.querySelector('#fundraisingDetail').innerHTML = details;
+               document.querySelector('title').innerHTML = project.name
+               document.querySelector('title').innerHTML = project.name
+               
+
+          }());
         } else {
-            console.error('No "id" parameter found in the URL.');
             window.location.href = `potekole://fundraising/`;
         }
-
       </script>
-   
   </body>
 </html>
 
