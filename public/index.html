@@ -118,6 +118,7 @@
       <section>
 
         <div class="container">
+          <!-- TODO Need to fix that for Small screen -->
     
           <div class="footer-brand">
             <h1 class="h2 hero-title">Comment ça marche</h1>
@@ -212,7 +213,7 @@ POTE KOLE est une application mobile innovante conçue pour révolutionner la co
               </li>
               <li> 
                 <a href="https://appdistribution.firebase.google.com/mobilerequired">
-                  <button class="btn-primary" onclick="">
+                  <button class="btn-primary">
                   Get started
                   </button>
                 </a>
@@ -369,6 +370,7 @@ POTE KOLE est une application mobile innovante conçue pour révolutionner la co
             return params.get(name);
         };
 
+
         // Get the 'id' from the URL
         const id = getUrlParameter('id');
 
@@ -376,6 +378,11 @@ POTE KOLE est une application mobile innovante conçue pour révolutionner la co
             const deeplink = `potekole://fundraising/${id}`;
             // Open the deep link if possible
             window.location.href = deeplink;
+
+            function handleClick(){
+              // window.location.href = deeplink;
+              alert("https://appdistribution.firebase.google.com/testerapps/1:1007886381659:android:5508c0608419684e5a857e/releases/6qkdt5gmnfmdg?utm_source=firebase-console")
+            }
             (async function main() {
                 const projectObj = new Project();
                 // console.log(" GET DATA",await projectObj.getAll());
@@ -397,8 +404,8 @@ POTE KOLE est une application mobile innovante conçue pour révolutionner la co
                           <span><strong>   ${project.description} </strong> </span>
                         </li>
                         <li> 
-                          <a href="https://appdistribution.firebase.google.com/mobilerequired">
-                            <button class="btn-primary" onclick="window.location.href = ${deeplink}">
+                          <a>
+                            <button class="btn-primary" onclick="handleClick()">
                              Pote KOLE
                             </button>
                           </a>
