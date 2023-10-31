@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Accept a payment</title>
+     <!-- - custom css link -->
+    <link rel="shortcut icon" href="./assets/images/logo_potekole.png" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- 
+      - google font link
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Grape+Nuts&family=Lilita+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="checkout.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="checkout.js" defer></script>
+
+  </head>
+
+  <body id="top" bgcolor="white">
+  
+        <!-- Display a payment form -->
+        <form id="payment-form">
+          <a href="#" class="logo">
+            POTE KOLE
+          </a>
+          <span><strong>  Pay  </strong> </span>
+
+          <h2 class="h2 amount"></h2>
+
+          <div id="link-authentication-element">
+              <!--Stripe.js injects the Link Authentication Element-->
+          </div>
+          <div id="payment-element">
+              <!--Stripe.js injects the Payment Element-->
+          </div>
+          <button id="submit">
+              <div class="spinner hidden" id="spinner"></div>
+              <span id="button-text">Pay now</span>
+          </button>
+          <div id="payment-message" class="hidden"></div>
+        </form>
+
+  
+    <script src="./assets/js/script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
