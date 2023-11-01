@@ -188,6 +188,13 @@
     font-size: var(--fs-logo);
   }
 
+  .logo_payment {
+    width: 300px;
+    font-family: var(--ff-lilita);
+    color: var(--primary);
+    font-size: '32px'
+  }
+
   .logo_footer{
     font-family: var(--ff-lilita);
     color: var(--white);
@@ -715,10 +722,6 @@
   
   }
   
-  
-  
-  
-  
   /**
    * responsive larger than 768px screen
    */
@@ -730,8 +733,6 @@
      */
   
     .container { max-width: 700px; }
-  
-  
   
     /**
      * DOWNLOAD

@@ -1,8 +1,16 @@
 // This is your test publishable API key.
 const stripe = Stripe("pk_test_5MB9slbqt3eAefweXS0LWH67");
 
-// The items the customer wants to buy
+function formatAmountForDisplay(amount, currency) {
+  let numberFormat = new Intl.NumberFormat(["en-US"], {
+    style: "currency",
+    currency: currency,
+    currencyDisplay: "symbol",
+  });
+  return numberFormat.format(amount);
+}
 
+// The items the customer wants to buy
 let elements;
 
 initialize();
@@ -25,8 +33,10 @@ async function initialize() {
     // Get the 'id' from the URL
     const amount = getUrlParameter('amount');
     const user_id = getUrlParameter('user_id');
+    const name = getUrlParameter('name');
+    const phone = getUrlParameter('phone');
 
-    document.querySelector('.amount').innerHTML = amount + " HTG"
+    document.querySelector('.amount').innerHTML =  formatAmountForDisplay (amount, "HTG")
 
     let link_api_dev = 'https://create-payment-intent-q7q3rskmgq-uc.a.run.app'
     let link_local  ="http://127.0.0.1:5001/pote-kole/us-central1/create_payment_intent";
@@ -36,7 +46,7 @@ async function initialize() {
     const response = await fetch(link_api, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: user_id, amount: amount }),
+        body: JSON.stringify({ user_id: user_id, amount: amount, name: name, phone: phone  }),
     });
 
     const { clientSecret } = await response.json();
