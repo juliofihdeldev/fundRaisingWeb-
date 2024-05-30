@@ -44,7 +44,7 @@
                   <span><i>Please restart the application.</i></span>
                 </li>
                 <li> 
-                  <a href="potekole://fundraising/">
+                  <a>
                     <button class="btn-primary">
                      Back to the App
                     </button>
@@ -61,6 +61,13 @@
 <script src="./assets/js/script.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+  const btn = document.querySelector('.btn-primary');
+    btn.addEventListener('click', () => {
+      window.location.href = "potekole://fundraising/checkout";
+    });
+</script>
 
 </body>
 </html>
